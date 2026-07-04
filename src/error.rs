@@ -31,4 +31,13 @@ pub enum TorrentError {
 
     #[error("'piece length' is zero")]
     ZeroPieceLength,
+
+    #[error("HTTP request error: {0}")]
+    Http(#[from] reqwest::Error),
+
+    #[error("tracker returned failure: {0}")]
+    TrackerFailure(String),
+
+    #[error("tracker response missing peers field: {0}")]
+    MissingPeers(String),
 }
