@@ -1,0 +1,7 @@
+[package]
+name = "RustWire"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bencode = "0.1.16"
