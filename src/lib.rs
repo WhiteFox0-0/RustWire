@@ -1,6 +1,10 @@
 mod error;
 mod torrent;
 mod tracker;
+mod peer_connection;
+mod message;
+mod ipc;
+mod download;
 
 pub use torrent::FromBencode;
 pub use torrent::Metainfo;
@@ -10,6 +14,12 @@ pub use tracker::Peer;
 pub use tracker::PeerAddr;
 pub use tracker::TrackerResponse;
 pub use tracker::get_peers;
+
+pub use download::Download;
+
+pub use peer_connection::PeerConnection;
+
+pub use ipc::IPC;
 
 pub use error::TorrentError;
 

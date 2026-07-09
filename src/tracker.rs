@@ -48,7 +48,7 @@ pub fn parse_compact_peers(bytes: &[u8]) -> Vec<PeerAddr> {
         .collect()
 }
 
-fn percent_encode_bytes(bytes: &[u8]) -> String {
+fn percent_encode_bytes(bytes: &[u8; 20]) -> String {
     bytes
         .iter()
         .map(|b| match b {
@@ -60,15 +60,8 @@ fn percent_encode_bytes(bytes: &[u8]) -> String {
         .collect()
 }
 
-fn generate_peer_id() -> [u8; 20] {
-    use rand::RngExt;
-    let mut peer_id = [0u8; 20];
-    peer_id[..8].copy_from_slice(b"-RW0001-");
-    rand::rng().fill(&mut peer_id[8..]);
-    peer_id
-}
-
 pub async fn get_peers(
+    peer_id_bytes: &[u8; 20],
     metainfo: &Metainfo,
     listener_port: u16,
 ) -> Result<Vec<PeerAddr>, TorrentError> {
@@ -82,7 +75,6 @@ pub async fn get_peers(
     });
 
     let info_hash = percent_encode_bytes(&metainfo.info_hash);
-    let peer_id_bytes = generate_peer_id();
     let peer_id = percent_encode_bytes(&peer_id_bytes);
 
     let url = format!(
