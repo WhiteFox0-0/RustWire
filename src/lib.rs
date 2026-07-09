@@ -17,6 +17,7 @@ pub use tracker::get_peers;
 
 pub use download::Download;
 
+pub use peer_connection::run_writer;
 pub use peer_connection::PeerConnection;
 
 pub use ipc::IPC;
